@@ -14,10 +14,10 @@ Features
 * Manage multiple scripts CSS and Javascript
 * Specify which urls each code takes effect
 * Manage tag attributes of <script> and <styles>
+* Choose where the code will be injected (header or footer)
 
 Coming soon features
 * Use external scripts
-* Choose where the code will be injected (header or footer)
 * Code highlight
 * Temporarily enable/disable code
 
@@ -37,6 +37,10 @@ This section describes how to install the plugin and get it working.
 3. Form to specify which url the Javascript or CSS will take effect
 
 == Changelog ==
+
+= 1.0.1 =
+* Added option to choose where the code will be injected (header or footer)
+* Bug fixes.
 
 = 1.0.0 =
 * Initial version.

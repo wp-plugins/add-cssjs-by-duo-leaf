@@ -1,8 +1,12 @@
 <?php
 
-require_once(WP_PLUGIN_DIR . '/add-css-js/core/resources-list-table.php');
+require_once(WP_PLUGIN_DIR . '/add-cssjs-by-duo-leaf/core/resources-list-table.php');
 
-$this->resourcesListTable = new dl_acj_ResourcesListTable($this->resourcesAccess->getAll(), $this->pluginInfo);
+global $wpdb;
+
+$results = $wpdb->get_results('SELECT * FROM `' . $this->pluginInfo->cssjsTableName . '`;');
+
+$this->resourcesListTable = new dl_acj_ResourcesListTable($results, $this->pluginInfo);
 
 $this->resourcesListTable->prepare_items();
 

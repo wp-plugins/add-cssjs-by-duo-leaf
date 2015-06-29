@@ -1,17 +1,15 @@
 <?php
 
-class dl_acj_ResourcesAccess {
+class dl_acj_StorageAccess {
 
-    /** @var dl_acj_PluginInfo */
-    public $pluginInfo;
     public $tablename;
 
-    public function __construct($pluginInfo) {
+    public function __construct($tableName) {
 
         global $wpdb;
 
-        $this->pluginInfo = $pluginInfo;
-        $this->tableName = $wpdb->prefix . $pluginInfo->name . '_resources';
+        $this->tableName = $tableName;
+        
     }
 
     public function getById($id) {
@@ -34,7 +32,7 @@ class dl_acj_ResourcesAccess {
         return $results;
     }
 
-    public function update(dl_acj_Resource $resource) {
+    public function update($resource) {
 
         global $wpdb;
 
@@ -44,11 +42,13 @@ class dl_acj_ResourcesAccess {
 
             $wpdb->insert($this->tableName, $ressourceArray);
             
+            return $wpdb->insert_id;
+            
         } else {
 
-            $where = $wpdb->prepare(" WHERE id = %s", $resource->id);
+            $where = $wpdb->prepare(" WHERE id = %s", $ressourceArray->id);
 
-            $wpdb->update($this->tableName, $ressourceArray, array('id' => $resource->id));
+            $wpdb->update($this->tableName, $ressourceArray, array('id' => $resource->id) );
 
         }
     }

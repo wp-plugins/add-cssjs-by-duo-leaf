@@ -13,5 +13,6 @@ class dl_acj_Resource {
     public $type = '';
     public $attributes = '';
     public $urls = '';
+    public $header = false;
 
 }

@@ -3,15 +3,15 @@
 /**
  * Plugin Name: Add CSS/Js by Duo Leaf
  * Plugin URI: http://DuoLeaf.com/
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Duo Leaf
  * Author URI: http://DuoLeaf.com/add-css-js-wordpress-plugin/
  * Description: Allows you to insert custom CSS and javascript in your wordpress site.
  * License: GPLv3 or later
  */
-require_once(WP_PLUGIN_DIR . '/add-css-js/core/plugin-info.php');
-require_once(WP_PLUGIN_DIR . '/add-css-js/core/resource.php');
-require_once(WP_PLUGIN_DIR . '/add-css-js/core/resources-access.php');
+require_once(WP_PLUGIN_DIR . '/add-cssjs-by-duo-leaf/core/plugin-info.php');
+require_once(WP_PLUGIN_DIR . '/add-cssjs-by-duo-leaf/core/resource.php');
+require_once(WP_PLUGIN_DIR . '/add-cssjs-by-duo-leaf/core/resources-access.php');
 
 register_activation_hook(__FILE__, 'dl_acj_pluginActivation');
 
@@ -21,24 +21,19 @@ function dl_acj_pluginActivation() {
 
     $pluginInfo = new dl_acj_PluginInfo();
 
-
-    $tablename = str_replace('-', '_', $wpdb->prefix . $pluginInfo->name . '_resources');
-
-    if ($wpdb->get_var("SHOW TABLES LIKE '$tablename'") != $tablename) {
-
-        $sql = "CREATE TABLE `$tablename` (
+    $sql = "CREATE TABLE `$pluginInfo->cssjsTableName` (
                 `id` INT( 11 ) NOT NULL AUTO_INCREMENT,
                 `name` VARCHAR( 100 ) NOT NULL ,
                 `content` TEXT NOT NULL,
                 `type` VARCHAR( 10 ) NOT NULL,
                 `attributes` VARCHAR( 100 ) NOT NULL,
                 `urls` TEXT NOT NULL,
-                PRIMARY KEY(id)
+                `header` BOOLEAN NOT NULL,
+                PRIMARY KEY  (id)
                 );";
 
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        dbDelta($sql);
-    }
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
 }
 
 class dl_acj_AddCssJs {
@@ -46,22 +41,19 @@ class dl_acj_AddCssJs {
     /** @var dl_acj_PluginInfo */
     public $pluginInfo;
 
-    /** @var dl_acj_ResourcesAccess */
-    public $resourcesAccess;
-
     /**
      * Constructor
      */
-    public function __construct($pluginInfo, $resourcesAccess) {
-
+    public function __construct($pluginInfo) {
 
         $this->pluginInfo = $pluginInfo;
-        $this->resourcesAccess = $resourcesAccess;
 
         // Hooks
         add_action('admin_menu', array(&$this, 'adminPanelsAndMetaBoxes'));
-        add_action('wp_head', array(&$this, 'injectJS'));
         add_action('admin_enqueue_scripts', array(&$this, 'adminEnqueueScripts'));
+        
+        add_action('wp_head', array(&$this, 'injectJSHeader'));
+        add_action('wp_footer', array(&$this, 'injectJSFooter'));
     }
 
     /**
@@ -84,10 +76,12 @@ class dl_acj_AddCssJs {
             include_once(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/actions/resource-form.php');
 
             wp_enqueue_script('dl_tabs');
+            
         } else if (isset($_GET['action']) && $_GET['action'] == 'delete-resource') {
 
-            $this->resourcesAccess->delete($_GET['resourceID']);
-
+            global $wpdb;
+            $wpdb->query($wpdb->prepare('DELETE FROM `' . $this->pluginInfo->cssjsTableName . '` WHERE id = %d', $_GET['resourceID']));
+            
             include_once(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/actions/resources-list.php');
         } else {
 
@@ -95,10 +89,19 @@ class dl_acj_AddCssJs {
         }
     }
 
+    
+    function injectJSHeader() {
+        $this->injectJS(true);
+    }
+    
+    function injectJSFooter() {
+        $this->injectJS(false);
+    }
+    
     /**
      * Inject JS/CSS into page 
      */
-    function injectJS() {
+    function injectJS($header) {
 
         if (is_admin() OR is_feed() OR is_robots() OR is_trackback()) {
             return;
@@ -106,7 +109,13 @@ class dl_acj_AddCssJs {
 
         $currentUrl = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 
-        foreach ($this->resourcesAccess->getAll() as $resource) {
+        global $wpdb;
+        
+        $sql = $wpdb->prepare('SELECT * FROM `' . $this->pluginInfo->cssjsTableName . '` WHERE header = %d;', $header);
+        
+        $resources = $wpdb->get_results($sql);
+        
+        foreach ($resources as $resource) {
 
             $shouldInject = true;
 
@@ -124,10 +133,10 @@ class dl_acj_AddCssJs {
                 foreach ($urls as $url) {
 
                     $url = stripslashes($url);
-                    
+
                     $url = trim($url);
-                    
-                    if (!empty($url) && strpos($currentUrl, $url) !== false ) {
+
+                    if (!empty($url) && strpos($currentUrl, $url) !== false) {
 
                         $shouldInject = true;
                         break;
@@ -153,7 +162,6 @@ class dl_acj_AddCssJs {
 }
 
 $dl_acj_pluginInfo = new dl_acj_PluginInfo();
-$dl_acj_resourcesAccess = new dl_acj_ResourcesAccess($dl_acj_pluginInfo);
-$dl_acj_addCssJs = new dl_acj_AddCssJs($dl_acj_pluginInfo, $dl_acj_resourcesAccess);
+$dl_acj_addCssJs = new dl_acj_AddCssJs($dl_acj_pluginInfo);
 
 

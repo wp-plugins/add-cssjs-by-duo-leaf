@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
     jQuery(document).ready(function () {
 
@@ -52,6 +51,11 @@
                     </select>
                     <label for="resourceAttributes"><strong><?php _e('Attributes', $this->pluginInfo->name); ?></strong></label>                                
                     <input type="text" name="resourceAttributes" id="resourceAttributes" size="30" value="<?php echo stripslashes($this->view->resource->attributes); ?>" ><?php ?></textarea>
+                    <label for="resourceLocation"><strong><?php _e('Location', $this->pluginInfo->name); ?></strong></label>
+                    <select name="resourceLocation" id="resourceLocation">
+                        <option <?php echo $this->view->resource->header ? 'selected="true"' : ''; ?> value="1" >Header</option>
+                        <option <?php echo !$this->view->resource->header ? 'selected="true"' : ''; ?> value="0" >Footer</option>
+                    </select>
                 </p>
                 <p>
                     <label for="resourceContent"><strong><?php _e('Your Content', $this->pluginInfo->name); ?></strong></label>                                
