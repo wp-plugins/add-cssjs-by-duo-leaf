@@ -6,17 +6,21 @@ Tested up to: 4.2.2
 Stable tag: trunk
 License: GPLv3
 
+A quick and easy way to include CSS and/or JavaScript in your WordPress site without getting your hands dirty by editing your theme manually.
+
 == Description ==
 
 A quick and easy way to include CSS and/or JavaScript in your WordPress site without getting your hands dirty by editing your theme manually. We also have more features to make your life easier in this process, check it out!
 
 Features
+
 * Manage multiple scripts CSS and Javascript
 * Specify which urls each code takes effect
 * Manage tag attributes of <script> and <styles>
 * Choose where the code will be injected (header or footer)
 
 Coming soon features
+
 * Use external scripts
 * Code highlight
 * Temporarily enable/disable code
@@ -37,6 +41,10 @@ This section describes how to install the plugin and get it working.
 3. Form to specify which url the Javascript or CSS will take effect
 
 == Changelog ==
+
+= 1.0.2 =
+* Improved the admin area.
+* Bug fixes.
 
 = 1.0.1 =
 * Added option to choose where the code will be injected (header or footer)

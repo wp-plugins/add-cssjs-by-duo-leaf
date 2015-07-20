@@ -35,11 +35,12 @@ if (isset($_POST['submit'])) {
         $this->view->resource->attributes = $_POST['resourceAttributes'];
         $this->view->resource->urls = $_POST['resourceUrls'];
         $this->view->resource->header = $_POST['resourceLocation'];
-        
+
         $ressourceArray = get_object_vars($this->view->resource);
-        
+
         if ($currentId == 0) {
             $wpdb->insert($this->pluginInfo->cssjsTableName, $ressourceArray);
+            $this->view->resource->id = $wpdb->insert_id;
         } else {
             $wpdb->update($this->pluginInfo->cssjsTableName, $ressourceArray, array('id' => $currentId));
         }
