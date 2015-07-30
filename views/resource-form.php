@@ -2,7 +2,6 @@
     <h2><?php echo $this->pluginInfo->displayName; ?></h2>
     <hr />
     <div class="wrap">
-
         <div class="row">
             <div class="col-md-9">
                 <div class="panel panel-primary">
@@ -101,6 +100,7 @@
             <?php include 'panel.php'; ?>
         </div> 
     </div> 
+</div> 
 
 
 

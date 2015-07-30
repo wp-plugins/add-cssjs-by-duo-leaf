@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Add CSS/Js by Duo Leaf
  * Plugin URI: http://DuoLeaf.com/
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Duo Leaf
  * Author URI: http://DuoLeaf.com/add-css-js-wordpress-plugin/
  * Description: Allows you to insert custom CSS and javascript in your wordpress site.
@@ -54,7 +54,7 @@ class dl_acj_AddCssJs {
 
         // Hooks
         add_action('admin_menu', array(&$this, 'adminPanelsAndMetaBoxes'));
-        add_action('admin_enqueue_scripts', array(&$this, 'adminEnqueueScripts'));
+
 
         add_action('wp_head', array(&$this, 'injectJSHeader'));
         add_action('wp_footer', array(&$this, 'injectJSFooter'));
@@ -65,6 +65,7 @@ class dl_acj_AddCssJs {
      */
     function adminPanelsAndMetaBoxes() {
         add_submenu_page('options-general.php', $this->pluginInfo->displayName, $this->pluginInfo->displayName, 'manage_options', $this->pluginInfo->name, array(&$this, 'adminPanel'));
+        add_action('admin_enqueue_scripts', array(&$this, 'adminEnqueueScripts'));
     }
 
     /**

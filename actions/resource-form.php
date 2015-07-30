@@ -14,6 +14,8 @@ if (isset($_GET['resourceID']) && $_GET['resourceID'] != 0) {
 
 if ($currentId != 0) {
     $this->view->resource = $wpdb->get_row($wpdb->prepare('SELECT * FROM `' . $this->pluginInfo->cssjsTableName . '` WHERE id = %d;', $currentId));
+}else{
+    $this->view->resource = new dl_acj_Resource();
 }
 
 
