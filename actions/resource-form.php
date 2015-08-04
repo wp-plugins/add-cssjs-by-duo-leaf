@@ -1,56 +1,107 @@
 <?php
 
-$this->view->onceName = $this->pluginInfo->name . '_nonce';
+class dl_acj_ActionResourceForm {
 
-global $wpdb;
+    /** @var dl_acj_PluginInfo */
+    public $pluginInfo;
 
-$currentId = 0;
+    /** @var dl_acj_Storage */
+    public $storage;
 
-if (isset($_GET['resourceID']) && $_GET['resourceID'] != 0) {
-    $currentId = $_GET['resourceID'];
-} elseif (isset($_POST['resourceID']) && $_POST['resourceID'] != 0) {
-    $currentId = $_POST['resourceID'];
-}
+    /** @var array */
+    public $get;
 
-if ($currentId != 0) {
-    $this->view->resource = $wpdb->get_row($wpdb->prepare('SELECT * FROM `' . $this->pluginInfo->cssjsTableName . '` WHERE id = %d;', $currentId));
-}else{
-    $this->view->resource = new dl_acj_Resource();
-}
+    /** @var array */
+    public $post;
 
+    public function __construct($pluginInfo, $storage, $get, $post) {
 
-if (isset($_POST['submit'])) {
+        $this->pluginInfo = $pluginInfo;
+        $this->storage = $storage;
+        $this->get = $get;
+        $this->post = $post;
+    }
 
-    // Check nonce
-    if (!isset($_POST[$this->view->onceName])) {
-        // Missing nonce	
-        $this->errorMessage = __('nonce field is missing. Settings NOT saved.', $this->pluginInfo->name);
-    } elseif (!wp_verify_nonce($_POST[$this->view->onceName], $this->pluginInfo->name)) {
-        // Invalid nonce
-        $this->errorMessage = __('Invalid nonce specified. Settings NOT saved.', $this->pluginInfo->name);
-    } else {
+    public function execute() {
+        $view = new stdClass();
 
-        $this->view->resource->id = $currentId;
-        $this->view->resource->name = $_POST['resourceName'];
-        $this->view->resource->content = $_POST['resourceContent'];
-        $this->view->resource->type = $_POST['resourceType'];
-        $this->view->resource->attributes = $_POST['resourceAttributes'];
-        $this->view->resource->urls = $_POST['resourceUrls'];
-        $this->view->resource->header = $_POST['resourceLocation'];
+        $view->onceName = $this->pluginInfo->name . '_nonce';
 
-        $ressourceArray = get_object_vars($this->view->resource);
+        $view->errorMessage = $this->getErrorsForm($view->onceName);
 
-        if ($currentId == 0) {
-            $wpdb->insert($this->pluginInfo->cssjsTableName, $ressourceArray);
-            $this->view->resource->id = $wpdb->insert_id;
-        } else {
-            $wpdb->update($this->pluginInfo->cssjsTableName, $ressourceArray, array('id' => $currentId));
+        $view->resource = $this->getCurrentResource($this->getCurrentID());
+
+        if (!empty($view->errorMessage)) {
+            return $view;
         }
 
-        $this->message = __('Settings Saved.', $this->name);
+        if (isset($this->post['submit'])) {
+            $this->fillResourceObject($view->resource);
+
+            $this->saveResource($view->resource);
+
+            $view->message = __('Settings Saved.', $this->pluginInfo->name);
+        }
+
+
+
+        return $view;
     }
+
+    public function getCurrentID() {
+
+        $currentId = 0;
+
+        if (isset($this->get['resourceID']) && $this->get['resourceID'] != 0) {
+            $currentId = $this->get['resourceID'];
+        } elseif (isset($this->post['resourceID']) && $this->post['resourceID'] != 0) {
+            $currentId = $this->post['resourceID'];
+        }
+
+        return $currentId;
+    }
+
+    public function getErrorsForm($onceName) {
+        $errorMessage = "";
+
+        if (!isset($this->post[$onceName])) { // Missing nonce	
+            $this->errorMessage = __('nonce field is missing. Settings NOT saved.', $this->pluginInfo->name);
+        } elseif (!wp_verify_nonce($this->post[$onceName], $this->pluginInfo->name)) { // Invalid nonce
+            $this->errorMessage = __('Invalid nonce specified. Settings NOT saved.', $this->pluginInfo->name);
+        }
+        return $errorMessage;
+    }
+
+    public function getCurrentResource($currentId) {
+        if ($currentId != 0) {
+            return $this->storage->getResourceByID($currentId);
+        } else {
+            return new dl_acj_Resource();
+        }
+    }
+
+    public function fillResourceObject($resource) {
+
+        $resource->name = $this->post['resourceName'];
+        $resource->content = $this->post['resourceContent'];
+        $resource->type = $this->post['resourceType'];
+        $resource->attributes = $this->post['resourceAttributes'];
+        $resource->urls = $this->post['resourceUrls'];
+        $resource->location = $this->post['resourceLocation'];
+        $resource->enabled = isset($this->post['resourceEnabled']);
+
+        return $resource;
+    }
+
+    public function saveResource($resource) {
+
+        $ressourceArray = get_object_vars($resource);
+
+        if ($resource->id == 0) {
+            $resource->id = $this->storage->insertResource($ressourceArray);
+        } else {
+            $this->storage->updateResource($ressourceArray, $resource->id);
+        }
+    }
+
 }
-
-
-
-include_once(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/views/resource-form.php');

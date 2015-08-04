@@ -42,3 +42,7 @@
     padding-left: 0px !important;
     padding-right: 0px !important;
 }
+
+.bootstrap-iso .modal{
+    top: 50px !important;
+}

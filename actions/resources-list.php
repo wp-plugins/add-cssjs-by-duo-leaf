@@ -1,7 +1,23 @@
 <?php
 
-global $wpdb;
+class dl_acj_ActionResourceList {
 
-$this->resources = $wpdb->get_results('SELECT * FROM `' . $this->pluginInfo->cssjsTableName . '`;');
+    /** @var dl_acj_PluginInfo */
+    public $pluginInfo;
 
-include_once(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/views/resources-list.php');
+    /** @var dl_acj_Storage */
+    public $storage;
+
+    public function __construct($pluginInfo, $storage) {
+
+        $this->pluginInfo = $pluginInfo;
+        $this->storage = $storage;
+    }
+
+    public function execute() {
+        $view = new stdClass();
+        $view->resources = $this->storage->getAllResources();
+        return $view;
+    }
+
+}

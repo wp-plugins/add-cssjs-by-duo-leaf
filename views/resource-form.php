@@ -13,19 +13,19 @@
                         <?php } ?>
                     </div> 
                     <div class="panel-body">
-                        <form action="options-general.php?page=<?php echo $this->pluginInfo->name ?>&action=resource-form" method="post">
-                            <?php
-                            if (isset($this->message)) {
+                        <form action="options-general.php?page=<?php echo $this->pluginInfo->name ?>&action=resource-form<?php echo ($this->view->resource->id != 0) ? "&resourceID=" . $this->view->resource->id : ""; ?>" method="post">
+                            <?php 
+                            if (!empty($this->view->message)) {
                                 ?>
                                 <div class="alert alert-success" role="alert">
                                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                    <span><?php echo $this->message; ?></span>
+                                    <span><?php echo $this->view->message; ?></span>
                                 </div>
                                 <?php
                             }
-                            if (isset($this->errorMessage)) {
+                            if (!empty($this->view->errorMessage)) {
                                 ?>
-                                <div class="error fade"><p><?php echo $this->errorMessage; ?></p></div>  
+                                <div class="error fade"><p><?php echo $this->view->errorMessage; ?></p></div>  
                                 <?php
                             }
                             ?> 
@@ -48,28 +48,41 @@
                                 <div role="tabpanel" class="tab-pane fade in active voffset3" id="content">
                                     <?php wp_nonce_field($this->pluginInfo->name, $this->view->onceName); ?>
                                     <input type="hidden" name="resourceID" id="resourceID" value="<?php echo $this->view->resource->id; ?>">
-                                    <div class="col-md-4 col-xs-8">
+                                    <div class="col-md-3 col-xs-8">
                                         <label for="resourceName"><strong><?php _e('Name', $this->pluginInfo->name); ?></strong></label>
                                         <input type="text" name="resourceName" id="resourceName" class="form-control"  value="<?php echo $this->view->resource->name; ?>" size="50"><?php ?>
                                     </div>
                                     <div class="col-md-2 col-xs-4">
                                         <label for="resourceLocation"><strong><?php _e('Location', $this->pluginInfo->name); ?></strong></label>
                                         <select name="resourceLocation" id="resourceLocation" class="form-control">
-                                            <option <?php echo $this->view->resource->header ? 'selected="true"' : ''; ?> value="1" >Header</option>
-                                            <option <?php echo!$this->view->resource->header ? 'selected="true"' : ''; ?> value="0" >Footer</option>
+                                            <?php
+                                            foreach ($this->storage->getAllResourceLocations() as $locationResourceID => $locationResource) {
+                                                $selected = ($locationResourceID == $this->view->resource->location) ? 'selected="true"' : '';
+                                                echo '<option ' . $selected . ' value="' . $locationResourceID . '" >' . $locationResource . '</option>';
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-xs-4">
                                         <label for="resourceType"><strong><?php _e('Type', $this->pluginInfo->name); ?></strong></label>                            
                                         <select name="resourceType" id="resourceType" class="form-control">
-                                            <option value="CSS" <?php echo $this->view->resource->type == 'CSS' ? 'selected="true"' : ''; ?> >CSS</option>
-                                            <option value="Javascript" <?php echo $this->view->resource->type == 'Javascript' ? 'selected="true"' : ''; ?> >Javascript</option>
+                                            <?php
+                                            foreach ($this->storage->getAllResourceTypes() as $resourceTypeID => $resourceType) {
+                                                $selected = ($resourceTypeID == $this->view->resource->type) ? 'selected="true"' : '';
+                                                echo '<option ' . $selected . ' value="' . $resourceTypeID . '" >' . $resourceType . '</option>';
+                                            }
+                                            ?>
                                         </select>
                                     </div>
-                                    <div class="col-md-4 col-xs-8 ">
+                                    <div class="col-md-3 col-xs-6 ">
                                         <label for="resourceAttributes"><strong><?php _e('Attributes', $this->pluginInfo->name); ?></strong></label>                                
                                         <input type="text" name="resourceAttributes" id="resourceAttributes" class="form-control" size="30" value="<?php echo stripslashes($this->view->resource->attributes); ?>" >
                                     </div>
+                                    <div class="col-md-2 col-xs-2 ">
+                                        <br class="voffset3">
+                                        <input type="checkbox" data-toggle="toggle" id="resourceEnabled" name="resourceEnabled" <?php echo ($this->view->resource->enabled) ? "checked" : ""; ?> data-on="Enabled" data-off="Disabled" />
+                                    </div>
+
                                     <div class="col-md-12 col-xs-12 voffset3">
                                         <label for="resourceContent"><strong><?php _e('Your Content', $this->pluginInfo->name); ?></strong></label>                                
                                         <textarea name="resourceContent" id="resourceContent"  class="form-control" rows="15" style="font-family:Courier New;"><?php echo stripslashes($this->view->resource->content); ?></textarea>

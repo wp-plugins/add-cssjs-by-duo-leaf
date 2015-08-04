@@ -2,25 +2,32 @@
 
 class dl_acj_Injector {
 
+    /** @var dl_acj_PluginInfo */
     public $pluginInfo;
 
-    /**
-     * Constructor
-     */
-    public function __construct($pluginInfo) {
+    /** @var dl_acj_Storage */
+    public $storage;
+
+    /** @var array */
+    public $server;
+
+    public function __construct($pluginInfo, $storage, $server) {
+
         $this->pluginInfo = $pluginInfo;
+        $this->storage = $storage;
+        $this->server = $server;
+
+        add_action('wp_head', array(&$this, 'injectJSHeader'));
+        add_action('wp_footer', array(&$this, 'injectJSFooter'));
     }
 
-    /**
-     * Inject JS/CSS into page 
-     */
-    function execute($header) {
+    function execute($location) {
 
         if (is_admin() OR is_feed() OR is_robots() OR is_trackback()) {
             return;
         }
 
-        $resources = $this->getResources($header);
+        $resources = $this->storage->getResourceByLocationAndEnabled($location, true);
 
         foreach ($resources as $resource) {
 
@@ -30,18 +37,9 @@ class dl_acj_Injector {
         }
     }
 
-    function getResources($header) {
-
-        global $wpdb;
-
-        $sql = $wpdb->prepare('SELECT * FROM `' . $this->pluginInfo->cssjsTableName . '` WHERE header = %d;', $header);
-
-        return $wpdb->get_results($sql);
-    }
-
     function verifyIfShoundInject($resource) {
 
-        $currentUrl = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $currentUrl = 'http' . (isset($this->server['HTTPS']) ? 's' : '') . '://' . "{$this->server['HTTP_HOST']}{$this->server['REQUEST_URI']}";
 
         $shouldInject = true;
 
@@ -74,11 +72,21 @@ class dl_acj_Injector {
 
     function inject($resource) {
 
-        if ($resource->type == "CSS") {
+        if ($resource->type == dl_acj_ResourceType::CSS) {
             echo '<style ' . stripslashes($resource->attributes) . '>' . stripslashes($resource->content) . '</style>';
         } else {
             echo '<script ' . stripslashes($resource->attributes) . '>' . stripslashes($resource->content) . '</script>';
         }
+    }
+
+    function injectJSHeader() {
+
+        $this->execute(dl_acj_ResourceLocation::Header);
+    }
+
+    function injectJSFooter() {
+
+        $this->execute(dl_acj_ResourceLocation::Footer);
     }
 
 }
