@@ -3,12 +3,15 @@
 /**
  * Plugin Name: Add CSS/Js by Duo Leaf
  * Plugin URI: http://DuoLeaf.com/
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Duo Leaf
  * Author URI: http://DuoLeaf.com/add-css-js-wordpress-plugin/
  * Description: Allows you to insert custom CSS and javascript in your wordpress site.
  * License: GPLv3 or later
  */
+require_once(WP_PLUGIN_DIR . '/add-cssjs-by-duo-leaf/duo-leaf/duoleaf.php');
+
+
 require_once(WP_PLUGIN_DIR . '/add-cssjs-by-duo-leaf/core/plugin-info.php');
 require_once(WP_PLUGIN_DIR . '/add-cssjs-by-duo-leaf/core/types.php');
 require_once(WP_PLUGIN_DIR . '/add-cssjs-by-duo-leaf/core/injector.php');

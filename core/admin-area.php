@@ -26,7 +26,8 @@ class dl_acj_AdminArea {
     }
 
     function adminPanelsAndMetaBoxes() {
-        add_submenu_page('options-general.php', $this->pluginInfo->displayName, $this->pluginInfo->displayName, 'manage_options', $this->pluginInfo->name, array(&$this, 'adminPanel'));
+
+        add_submenu_page('duo-leaf', $this->pluginInfo->smallDisplayName, $this->pluginInfo->smallDisplayName, 'manage_options', $this->pluginInfo->name, array(&$this, 'adminPanel'));
         add_action('admin_enqueue_scripts', array(&$this, 'adminEnqueueScripts'));
     }
 
@@ -42,7 +43,6 @@ class dl_acj_AdminArea {
             $action = new dl_acj_ActionResourceForm($this->pluginInfo, $this->storage, $this->get, $this->post);
             $this->view = $action->execute();
             include(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/views/resource-form.php');
-            
         } else {
 
 

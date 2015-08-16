@@ -9,7 +9,7 @@ class dl_acj_UpgradeManager {
 
         $this->pluginInfo = $pluginInfo;
 
-        register_activation_hook(WP_PLUGIN_DIR . '/add-cssjs-by-duo-leaf/index.php', array(&$this, 'activate'));
+        register_activation_hook(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/index.php', array(&$this, 'activate'));
 
         add_action('plugins_loaded', array(&$this, 'upgrade'));
     }

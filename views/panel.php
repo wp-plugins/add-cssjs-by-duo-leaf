@@ -13,7 +13,7 @@
             <div class="panel-heading">Did you like it?</div>
             <div class="panel-body">
                 <img src="<?php echo plugins_url('../assets/img/', __FILE__) ?>star-icon.svg" class="img-responsive center-block" width="50px" />
-                <p class="text-center"><a href="https://wordpress.org/plugins/add-cssjs-by-duo-leaf/" target="blank">If you enjoy our plugin, please give it 5 stars on WordPress: Rate the plugin</a><p>            
+                <p class="text-center"><a href="https://wordpress.org/plugins/benchmark-by-duo-leaf/" target="blank">If you enjoy our plugin, please give it 5 stars on WordPress: Rate the plugin</a><p>            
             </div>
         </div>
     </div>

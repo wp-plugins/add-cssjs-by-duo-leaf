@@ -13,7 +13,7 @@
                         <?php } ?>
                     </div> 
                     <div class="panel-body">
-                        <form action="options-general.php?page=<?php echo $this->pluginInfo->name ?>&action=resource-form<?php echo ($this->view->resource->id != 0) ? "&resourceID=" . $this->view->resource->id : ""; ?>" method="post">
+                        <form action="admin.php?page=<?php echo $this->pluginInfo->name ?>&action=resource-form<?php echo ($this->view->resource->id != 0) ? "&resourceID=" . $this->view->resource->id : ""; ?>" method="post">
                             <?php 
                             if (!empty($this->view->message)) {
                                 ?>
@@ -101,7 +101,7 @@
                                     <span class="glyphicon glyphicon-floppy-disk"></span>
                                     <?php _e('Save', $this->pluginInfo->name); ?>
                                 </button>
-                                <a class="btn btn-default" href="options-general.php?page=add-cssjs-by-duo-leaf" >
+                                <a class="btn btn-default" href="admin.php?page=add-cssjs-by-duo-leaf" >
                                     <span class="glyphicon glyphicon-arrow-left"></span>
                                     <?php _e('Back', $this->pluginInfo->name); ?>
                                 </a>

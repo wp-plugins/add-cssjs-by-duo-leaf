@@ -2,7 +2,7 @@
 Contributors: DuoLeaf
 Tags: javascript, js, css, inject
 Requires at least: 3.0.0
-Tested up to: 4.2.3
+Tested up to: 4.2.4
 Stable tag: trunk
 License: GPLv3
 
@@ -40,6 +40,9 @@ This section describes how to install the plugin and get it working.
 3. Form to specify which url the Javascript or CSS will take effect
 
 == Changelog ==
+
+= 1.0.5 =
+* Bug fixes.
 
 = 1.0.4 =
 * Add option to enable or disable items
