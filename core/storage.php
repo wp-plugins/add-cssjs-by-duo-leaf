@@ -74,11 +74,11 @@ class dl_acj_Storage {
         $wpdb->query($sql);
     }
 
-    function getResourceByLocationAndEnabled($type, $enabled) {
+    function getResourceByLocationAndEnabled($location, $enabled) {
 
         global $wpdb;
 
-        $sql = $wpdb->prepare('SELECT * FROM `' . $this->pluginInfo->cssjsTableName . '` WHERE type = %d AND enabled = %d;', $type, $enabled);
+        $sql = $wpdb->prepare('SELECT * FROM `' . $this->pluginInfo->cssjsTableName . '` WHERE location = %d AND enabled = %d;', $location, $enabled);
 
         return $wpdb->get_results($sql);
     }

@@ -1,5 +1,17 @@
 <div class="col-md-3 fix-margin">
     <div class="col-md-12 col-xs-4 ">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Go PRO</div>
+            <div class="panel-body">
+                <h4 class="text-center">                
+                    <a class="text-center" href="?page=<?php echo $this->view->pluginInfo->name ?>&action=go-pro">
+                        Upgrade to the Pro version and get more tools to play with.
+                    </a>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-4 ">
         <div class="panel panel-default">
             <div class="panel-heading">Made By</div>
             <div class="panel-body">

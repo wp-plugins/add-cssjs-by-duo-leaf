@@ -1,44 +1,44 @@
-.voffset {
+.bootstrap-iso .voffset {
     margin-top: 2px;
 }
 
-.voffset1 {
+.bootstrap-iso .voffset1 {
     margin-top: 5px;
 }
 
-.voffset2 {
+.bootstrap-iso .voffset2 {
     margin-top: 10px;
 }
 
-.voffset3 {
+.bootstrap-iso .voffset3 {
     margin-top: 15px;
 }
 
-.voffset4 {
+.bootstrap-iso .voffset4 {
     margin-top: 30px;
 }
 
-.voffset5 {
+.bootstrap-iso .voffset5 {
     margin-top: 40px;
 }
 
-.voffset6 {
+.bootstrap-iso .voffset6 {
     margin-top: 60px;
 }
 
-.voffset7 {
+.bootstrap-iso .voffset7 {
     margin-top: 80px;
 }
 
-.voffset8 {
+.bootstrap-iso .voffset8 {
     margin-top: 100px;
 }
 
-.voffset9 {
+.bootstrap-iso .voffset9 {
     margin-top: 150px;
 }
 
-.fix-margin{
+.bootstrap-iso .fix-margin{
     padding-left: 0px !important;
     padding-right: 0px !important;
 }

@@ -16,7 +16,9 @@ class dl_acj_ActionResourceList {
 
     public function execute() {
         $view = new stdClass();
+        $view->pluginInfo = $this->pluginInfo;
         $view->resources = $this->storage->getAllResources();
+        $view->resourceTypes = $this->storage->getAllResourceTypes();
         return $view;
     }
 

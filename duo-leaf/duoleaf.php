@@ -19,7 +19,6 @@ if (!class_exists('duo_leaf_core')) {
 
         function adminPanelsAndMetaBoxes() {
             add_menu_page('Duo Leaf', 'Duo Leaf', 'manage_options', 'duo-leaf', array(&$this, 'adminPanel'), plugin_dir_url(__FILE__) . 'img/icon_16.png');
-            //add_submenu_page('duo-leaf', 'My Custom Submenu Page', 'My Custom Submenu Page', 'manage_options', 'admin.php?page=popular-posts.php');
         }
 
         public function adminPanel() {
@@ -57,36 +56,41 @@ if (!class_exists('duo_leaf_core')) {
     $duoLeafPlugins = array(
         'add-cssjs-by-duo-leaf/index.php' => array(
             'name' => 'Add CSS & Javascript',
+            'key' => 'add-cssjs-by-duo-leaf',
             'description' => 'A quick and easy way to include CSS and/or JavaScript in your Wordpress site without getting your hands dirty by editing the theme manually.',
-            'image' => 'http://duoleaf.com/wp-content/uploads/2015/08/Cover-Add-Css-Javascript-Wodpress-Plugin.png',
+            'image' => plugins_url('/img/', __FILE__) . 'Cover-Add-Css-Javascript-Wodpress-Plugin.png',
             'install' => 'plugin-install.php?tab=search&type=term&s=Add+CSS+Js+by+Duo+Leaf',
             'settingsPage' => 'admin.php?page=add-cssjs-by-duo-leaf'
         ),
         'toaster-contact-form-by-duo-leaf/index.php' => array(
             'name' => 'Toaster Contact Form WordPress plugin',
+            'key' => 'toaster-contact-form-by-duo-leaf',
             'description' => 'This plugin creates contact simple form on the bottom right corner of your site, with a ‘toaster’ like effect. The form contains name, email and message.',
-            'image' => 'http://duoleaf.com/wp-content/uploads/2015/08/Cover-Toaster-Form-Wordpress-Plugin.png',
+            'image' => plugins_url('/img/', __FILE__) . 'Cover-Toaster-Form-Wordpress-Plugin.png',
             'install' => 'plugin-install.php?tab=search&type=term&s=Toaster+Contact+Form+by+Duo+Leaf',
             'settingsPage' => 'admin.php?page=toaster-contact-form-by-duo-leaf'
         ),
         '404-error-log-report-by-duo-leaf/index.php' => array(
             'name' => '404 Error log report WordPress Plugin',
+            'key' => '404-error-log-report-by-duo-leaf',
             'description' => 'Generate a report of 404 errors that occurs in your site.',
-            'image' => 'http://duoleaf.com/wp-content/uploads/2015/08/Cover-404-Error-Log-Report-Wordpress-Plugin.png',
+            'image' => plugins_url('/img/', __FILE__) . 'Cover-404-Error-Log-Report-Wordpress-Plugin.png',
             'install' => 'plugin-install.php?tab=search&type=term&s=404+Error+log+report+by+Duo+Leaf',
             'settingsPage' => 'admin.php?page=404-error-log-report-by-duo-leaf'
         ),
         'toaster-widget-by-duo-leaf/index.php' => array(
             'name' => 'Toaster Widget Area',
+            'key' => 'toaster-widget-by-duo-leaf',
             'description' => 'This plugin creates a widget area on the bottom right corner of your site, with a ‘toaster’ like effect.',
-            'image' => 'http://duoleaf.com/wp-content/uploads/2015/08/Cober-Toaster-Widget-Area-Wordpress-Plugin.png',
+            'image' => plugins_url('/img/', __FILE__) . 'Cober-Toaster-Widget-Area-Wordpress-Plugin.png',
             'install' => 'plugin-install.php?tab=search&type=term&s=Toaster+Widget+by+Duo+Leaf',
             'settingsPage' => 'admin.php?page=toaster-widget-by-duo-leaf'
         ),
         'benchmark-by-duo-leaf/index.php' => array(
             'name' => 'Benchmark',
+            'key' => 'benchmark-by-duo-leaf',
             'description' => 'A simple way to check how long it takes to load each page to your users.',
-            'image' => 'http://duoleaf.com/wp-content/uploads/2015/08/Cover-Benchmark-Wordpress-Plugin.png',
+            'image' => plugins_url('/img/', __FILE__) . '/Cover-Benchmark-Wordpress-Plugin.png',
             'install' => 'plugin-install.php?tab=search&type=term&s=Benchmark+by+Duo+Leaf',
             'settingsPage' => 'admin.php?page=benchmark-by-duo-leaf'
         )

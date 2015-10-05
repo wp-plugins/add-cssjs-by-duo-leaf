@@ -45,15 +45,15 @@ class dl_acj_UpgradeManager {
 
         global $wpdb;
 
-        $sql = 'CREATE TABLE `' . $this->pluginInfo->cssjsTableName . '` (
-                `id` INT( 11 ) NOT NULL AUTO_INCREMENT,
-                `name` VARCHAR( 100 ) NOT NULL ,
-                `content` TEXT NOT NULL,
-                `type` INT NOT NULL DEFAULT 0,
-                `attributes` VARCHAR( 100 ) NOT NULL,
-                `urls` TEXT NOT NULL,
-                `location` INT NOT NULL DEFAULT 1,
-                `enabled` BOOLEAN NOT NULL DEFAULT 1,
+        $sql = 'CREATE TABLE ' . $this->pluginInfo->cssjsTableName . ' (
+                id INT( 11 ) NOT NULL AUTO_INCREMENT,
+                name VARCHAR( 100 ) NOT NULL ,
+                content TEXT NOT NULL,
+                type INT NOT NULL DEFAULT 0,
+                attributes VARCHAR( 100 ) NOT NULL,
+                urls TEXT NOT NULL,
+                location INT NOT NULL DEFAULT 1,
+                enabled BOOLEAN NOT NULL DEFAULT 1,
                 PRIMARY KEY  (id)
                 );';
 

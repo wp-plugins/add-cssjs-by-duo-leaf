@@ -35,14 +35,26 @@ class dl_acj_AdminArea {
 
         $this->adminRegisterScripts();
 
-        $this->view = new stdClass();
+        $viewData = new stdClass();
 
         if (isset($_GET['action']) && $_GET['action'] == 'resource-form') {
 
             include_once(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/actions/resource-form.php');
-            $action = new dl_acj_ActionResourceForm($this->pluginInfo, $this->storage, $this->get, $this->post);
-            $this->view = $action->execute();
             include(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/views/resource-form.php');
+
+            $action = new dl_acj_ActionResourceForm($this->pluginInfo, $this->storage, $this->get, $this->post);
+            $viewData = $action->execute();
+            $view = new dl_acj_ViewResourceForm($viewData);
+            $view->execute();
+        } else if (isset($_GET['action']) && $_GET['action'] == 'go-pro') {
+
+            include_once(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/actions/go-pro.php');
+            include_once(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/views/go-pro.php');
+
+            $action = new dl_go_proAction($this->pluginInfo, $this->post);
+            $viewData = $action->execute();
+            $view = new dl_go_proView($viewData);
+            $view->execute();
         } else {
 
 
@@ -51,9 +63,11 @@ class dl_acj_AdminArea {
             }
 
             include_once(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/actions/resources-list.php');
-            $action = new dl_acj_ActionResourceList($this->pluginInfo, $this->storage);
-            $this->view = $action->execute();
             include_once(WP_PLUGIN_DIR . '/' . $this->pluginInfo->name . '/views/resources-list.php');
+            $action = new dl_acj_ActionResourceList($this->pluginInfo, $this->storage);
+            $viewData = $action->execute();
+            $view = new dl_acj_ViewResourceList($viewData);
+            $view->execute();
         }
     }
 

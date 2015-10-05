@@ -2,7 +2,7 @@
 Contributors: DuoLeaf
 Tags: javascript, js, css, inject
 Requires at least: 3.0.0
-Tested up to: 4.2.4
+Tested up to: 4.3.1
 Stable tag: trunk
 License: GPLv3
 
@@ -20,10 +20,14 @@ Features
 * Choose where the code will be injected (header or footer)
 * Enable/disable items
 
-Coming soon features
+Pro version features
 
-* Use external scripts
 * Code highlight
+* Auto minify files
+* Use files as external
+* Use regex to filter which pages the script will be injected
+
+
 
 == Installation ==
 
@@ -40,6 +44,9 @@ This section describes how to install the plugin and get it working.
 3. Form to specify which url the Javascript or CSS will take effect
 
 == Changelog ==
+
+= 1.0.6 =
+* Bug fixes.
 
 = 1.0.5 =
 * Bug fixes.

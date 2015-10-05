@@ -25,6 +25,10 @@ class dl_acj_ActionResourceForm {
     public function execute() {
         $view = new stdClass();
 
+        $view->resourceLocations = $this->storage->getAllResourceLocations();
+        $view->resourceTypes = $this->storage->getAllResourceTypes();
+        $view->pluginInfo = $this->pluginInfo;
+        
         $view->onceName = $this->pluginInfo->name . '_nonce';
 
         $view->errorMessage = $this->getErrorsForm($view->onceName);
@@ -40,7 +44,7 @@ class dl_acj_ActionResourceForm {
 
             $this->saveResource($view->resource);
 
-            $view->message = __('Settings Saved.', $this->pluginInfo->name);
+            $view->message = __('Saved successfully.', $this->pluginInfo->name);
         }
 
 
