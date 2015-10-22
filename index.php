@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Add CSS/Js by Duo Leaf
  * Plugin URI: http://DuoLeaf.com/
- * Version: 1.0.6
+ * Version: 1.0.7
  * Author: Duo Leaf
  * Author URI: http://DuoLeaf.com/add-css-js-wordpress-plugin/
  * Description: Allows you to insert custom CSS and javascript in your wordpress site.

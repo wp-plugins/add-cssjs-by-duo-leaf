@@ -21,7 +21,7 @@ class dl_acj_PluginInfo {
         $this->smallDisplayName = "Add CSS/Js";
         $this->displayName = $this->smallDisplayName . " by Duo Leaf";
 
-        $this->currentVersion = '1.0.4';
+        $this->currentVersion = '1.0.5';
 
 
         global $wpdb;

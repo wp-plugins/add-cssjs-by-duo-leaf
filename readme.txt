@@ -45,6 +45,9 @@ This section describes how to install the plugin and get it working.
 
 == Changelog ==
 
+= 1.0.7 =
+* Bugfix and improvements
+
 = 1.0.6 =
 * Bug fixes.
 

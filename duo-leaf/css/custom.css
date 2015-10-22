@@ -51,19 +51,43 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     text-align: center;
-    min-height: 330px;
     background-color: #FFF ;
+    min-height: 300px; 
+    padding: 0 0 10px 0;
+}
+.home-plugin-panel-parent:nth-child(odd) {
+    clear: both;
+}
+.home-plugin-banner{
+    width:  100%;
+    height: 175px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #1FA67A;
+    position: relative;
+}
+.home-plugin-title, .home-plugin-title:hover{
+    font-size: 24px;
+    position: absolute;
+    left: 30px;
+    bottom: 20px;
+    padding: 8px 15px;
+    margin-bottom: 4px;
+    color: #fff !important;
+    background: rgba( 30, 30, 30, 0.9 ) !important;
+    text-shadow: 0 1px 3px rgba( 0, 0, 0, 0.4 ) !important;
+    -webkit-box-shadow: 0 0 30px rgba( 255, 255, 255, 0.1 ) !important;
+    -moz-box-shadow: 0 0 30px rgba( 255, 255, 255, 0.1 ) !important;
+    box-shadow: 0 0 30px rgba( 255, 255, 255, 0.1 ) !important;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    text-decoration: none !important;
+}
+.home-plugin-text{
+    font-size: 14px;
+    padding: 10px;
 }
 
-.home-plugin-panel-title, .home-plugin-panel-title:hover{
-    font-size:20px;
-    font-weight: bold;
-    color: #15AF36;
-}
-
-.home-plugin-panel-cover-img{
-    margin: 0 0 10px 0;
-}
 .box {
     width:200px;height:300px;
     position:relative;

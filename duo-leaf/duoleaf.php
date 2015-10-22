@@ -62,29 +62,21 @@ if (!class_exists('duo_leaf_core')) {
             'install' => 'plugin-install.php?tab=search&type=term&s=Add+CSS+Js+by+Duo+Leaf',
             'settingsPage' => 'admin.php?page=add-cssjs-by-duo-leaf'
         ),
-        'toaster-contact-form-by-duo-leaf/index.php' => array(
-            'name' => 'Toaster Contact Form WordPress plugin',
-            'key' => 'toaster-contact-form-by-duo-leaf',
-            'description' => 'This plugin creates contact simple form on the bottom right corner of your site, with a ‘toaster’ like effect. The form contains name, email and message.',
-            'image' => plugins_url('/img/', __FILE__) . 'Cover-Toaster-Form-Wordpress-Plugin.png',
-            'install' => 'plugin-install.php?tab=search&type=term&s=Toaster+Contact+Form+by+Duo+Leaf',
-            'settingsPage' => 'admin.php?page=toaster-contact-form-by-duo-leaf'
-        ),
         '404-error-log-report-by-duo-leaf/index.php' => array(
-            'name' => '404 Error log report WordPress Plugin',
+            'name' => '404 Error log report',
             'key' => '404-error-log-report-by-duo-leaf',
             'description' => 'Generate a report of 404 errors that occurs in your site.',
             'image' => plugins_url('/img/', __FILE__) . 'Cover-404-Error-Log-Report-Wordpress-Plugin.png',
             'install' => 'plugin-install.php?tab=search&type=term&s=404+Error+log+report+by+Duo+Leaf',
             'settingsPage' => 'admin.php?page=404-error-log-report-by-duo-leaf'
         ),
-        'toaster-widget-by-duo-leaf/index.php' => array(
-            'name' => 'Toaster Widget Area',
-            'key' => 'toaster-widget-by-duo-leaf',
-            'description' => 'This plugin creates a widget area on the bottom right corner of your site, with a ‘toaster’ like effect.',
-            'image' => plugins_url('/img/', __FILE__) . 'Cober-Toaster-Widget-Area-Wordpress-Plugin.png',
-            'install' => 'plugin-install.php?tab=search&type=term&s=Toaster+Widget+by+Duo+Leaf',
-            'settingsPage' => 'admin.php?page=toaster-widget-by-duo-leaf'
+        'cron-manager-by-duo-leaf/index.php' => array(
+            'name' => 'Cron Manager',
+            'key' => 'cron-manager-by-duo-leaf',
+            'description' => 'Allows you to manage cron task/jobs/schedules easily.',
+            'image' => plugins_url('/img/', __FILE__) . 'Cron-Manager-Wordpress-Plugin',
+            'install' => 'plugin-install.php?tab=search&type=term&s=Cron+Manager+by+Duo+Leaf',
+            'settingsPage' => 'admin.php?page=cron-manager-by-duo-leaf'
         ),
         'benchmark-by-duo-leaf/index.php' => array(
             'name' => 'Benchmark',
@@ -93,6 +85,22 @@ if (!class_exists('duo_leaf_core')) {
             'image' => plugins_url('/img/', __FILE__) . '/Cover-Benchmark-Wordpress-Plugin.png',
             'install' => 'plugin-install.php?tab=search&type=term&s=Benchmark+by+Duo+Leaf',
             'settingsPage' => 'admin.php?page=benchmark-by-duo-leaf'
+        ),
+        'toaster-widget-by-duo-leaf/index.php' => array(
+            'name' => 'Toaster Widget Area',
+            'key' => 'toaster-widget-by-duo-leaf',
+            'description' => 'This plugin creates a widget area on the bottom right corner of your site, with a ‘toaster’ like effect.',
+            'image' => plugins_url('/img/', __FILE__) . 'Cover-Toaster-Widget-Area-Wordpress-Plugin.png',
+            'install' => 'plugin-install.php?tab=search&type=term&s=Toaster+Widget+by+Duo+Leaf',
+            'settingsPage' => 'admin.php?page=toaster-widget-by-duo-leaf'
+        ),
+        'toaster-contact-form-by-duo-leaf/index.php' => array(
+            'name' => 'Toaster Contact Form',
+            'key' => 'toaster-contact-form-by-duo-leaf',
+            'description' => 'This plugin creates contact simple form on the bottom right corner of your site, with a ‘toaster’ like effect. The form contains name, email and message.',
+            'image' => plugins_url('/img/', __FILE__) . 'Cover-Toaster-Form-Wordpress-Plugin.png',
+            'install' => 'plugin-install.php?tab=search&type=term&s=Toaster+Contact+Form+by+Duo+Leaf',
+            'settingsPage' => 'admin.php?page=toaster-contact-form-by-duo-leaf'
         )
     );
 
